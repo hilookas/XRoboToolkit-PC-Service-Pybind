@@ -1,0 +1,18 @@
+[project]
+name = "xrobotoolkit_sdk"
+version = "1.0.2"
+description = "Python binding for the XRoboToolkit PC Service SDK (pybind11)."
+requires-python = ">=3.10"
+
+[tool.scikit-build]
+minimum-version = "build-system.requires"
+build-dir = "build/{wheel_tag}"
+wheel.py-api = ""
+
+[build-system]
+# scikit-build-core puts the build env's site-packages on CMAKE_PREFIX_PATH so
+# `find_package(pybind11)` resolves under standard PEP517 isolation (no conda,
+# no --no-build-isolation). The native PXREARobotSDK is taken prebuilt from the
+# sibling XRoboToolkit-PC-Service submodule (see CMakeLists.txt).
+requires = ["scikit-build-core>=0.10", "pybind11>=2.12"]
+build-backend = "scikit_build_core.build"
